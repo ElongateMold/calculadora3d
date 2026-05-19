@@ -1,10 +1,26 @@
+import 'package:calculartor3d/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'config_screen.dart';
 import 'calculate_screen.dart';
 import 'history_screen.dart';
+import 'auth_screen.dart';
 
-class PantallaInicio extends StatelessWidget {
-  const PantallaInicio({super.key});
+class StartScreen extends StatefulWidget {
+  const StartScreen({super.key});
+
+  @override
+  State<StartScreen> createState() => _StartScreenState();
+  
+  
+}
+
+class _StartScreenState extends State<StartScreen> {
+  @override
+  void initState() {
+    super.initState();
+    final AuthRepository authRepository = Login();
+    authRepository.signInAnonymously();
+  }
 
   @override
   Widget build(BuildContext context) {
