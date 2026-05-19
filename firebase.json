@@ -1,0 +1,33 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "calculadora3d-stefan",
+          "appId": "1:320568980614:android:a55b115d21bf1f819d0d07",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "calculadora3d-stefan",
+          "configurations": {
+            "android": "1:320568980614:android:a55b115d21bf1f819d0d07",
+            "macos": "1:320568980614:ios:608fe8429fb4f92b9d0d07",
+            "web": "1:320568980614:web:c36b0ea3853ba8b59d0d07",
+            "windows": "1:320568980614:web:c049736f7fd53a669d0d07"
+          }
+        }
+      }
+    }
+  },
+  "emulators": {
+    "singleProjectMode": true,
+    "firestore": {
+      "port": 8080
+    },
+    "ui": {
+      "enabled": true
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "320568980614",
+    "project_id": "calculadora3d-stefan",
+    "storage_bucket": "calculadora3d-stefan.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320568980614:android:a55b115d21bf1f819d0d07",
+        "android_client_info": {
+          "package_name": "com.example.calculartor3d"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWGAakcnU9hv67OJOlcuCWgIt2w4tsId0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
