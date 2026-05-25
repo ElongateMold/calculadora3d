@@ -2,27 +2,55 @@ import 'package:flutter/material.dart';
 import 'screens/start_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'colors.dart';
 
+final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.system);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MiCalculadora3DApp());
+  runApp(const Calculator3DApp());
 }
 
-class MiCalculadora3DApp extends StatelessWidget {
-  const MiCalculadora3DApp({super.key});
-
+class Calculator3DApp extends StatelessWidget {
+  const Calculator3DApp({super.key});
+  
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '3D Calculator',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
-      home: const PantallaInicio(),
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeNotifier, 
+      builder: (context, currentMode, child) {
+        return MaterialApp(
+          title: 'THREED',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
+            scaffoldBackgroundColor: AppColors.background,
+            textTheme: GoogleFonts.latoTextTheme(),
+            appBarTheme: AppBarTheme(backgroundColor: AppColors.primary, foregroundColor: AppColors.textDark,),
+            useMaterial3: true,
+          ),
+          darkTheme: ThemeData (
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: AppColors.primaryDark,
+              brightness: Brightness.dark,
+            ),
+            scaffoldBackgroundColor: AppColors.backgroundDark,
+
+            textTheme: GoogleFonts.latoTextTheme(ThemeData.dark().textTheme),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: AppColors.primaryDark,
+              foregroundColor: AppColors.textDark,
+            ),
+            useMaterial3: true,
+
+          ),
+          themeMode: currentMode,
+
+          home: const StartScreen(),
+        );
+      },
     );
   }
 }

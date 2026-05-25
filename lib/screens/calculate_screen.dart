@@ -1,7 +1,9 @@
+import 'package:calculartor3d/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../services/calculator_service.dart';
 import '../repositories/history_repository.dart';
+import '../colors.dart';
 
 class CalculateScreen extends StatefulWidget {
   const CalculateScreen({super.key});
@@ -91,9 +93,9 @@ class _CalculateScreenState extends State<CalculateScreen> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.blue.shade50,
+                color: AppColors.primary,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.blue),
+                border: Border.all(color: AppColors.primaryDark),
               ),
               child: Text(
                 _result.isEmpty ? "Ingresa los datos para calcular" : _result,

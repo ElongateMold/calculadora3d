@@ -8,6 +8,6 @@ abstract class AuthRepository {
 class Login implements AuthRepository {
   @override
   Future<void> signInAnonymously() async {
-    final anonimous_auth = await FirebaseAuth.instance.signInAnonymously();
+    await FirebaseAuth.instance.signInAnonymously();
   }
 }

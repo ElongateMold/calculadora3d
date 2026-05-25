@@ -7,6 +7,7 @@ abstract class HistoryRepository {
   Future<void> savePrint(Map<String, dynamic> data);
   Future<List<Map<String, dynamic>>> readPrint();
   Future<int> counter();
+  Future<void> deletePrint(String id);
 }
 
 class FirebaseHistory implements HistoryRepository {
@@ -15,15 +16,23 @@ class FirebaseHistory implements HistoryRepository {
     final db = FirebaseFirestore.instance;
     await db.collection('history').add(data);
   }
+
+  @override
+  Future<void> deletePrint(String id) async {
+    final db = FirebaseFirestore.instance;
+    await db.collection('history').doc(id).delete();
+  }
   
   @override
   Future<List<Map<String, dynamic>>> readPrint() async {
     final db = FirebaseFirestore.instance;
-    final snapshot = await db.collection('history').get();
+    final snapshot = await db.collection('history').orderBy('date', descending: true).get();
     List<Map<String, dynamic>> listHistory = [];
 
     for (var doc in snapshot.docs) {
-      listHistory.add(doc.data());
+      final data = doc.data();
+      data['id'] = doc.id;
+      listHistory.add(data);
     }
     return listHistory;
   }
@@ -35,5 +44,7 @@ class FirebaseHistory implements HistoryRepository {
     int counter = snapshot.count ?? 0;
     return counter;
   }
+
+
 }
 

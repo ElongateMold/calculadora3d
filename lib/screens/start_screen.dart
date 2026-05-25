@@ -1,6 +1,6 @@
 import 'package:calculartor3d/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
-import 'config_screen.dart';
+import 'parameters_screen.dart';
 import 'calculate_screen.dart';
 import 'history_screen.dart';
 import 'auth_screen.dart';
@@ -26,7 +26,7 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('3D Calculator'),
+        title: const Text('THREED'),
         centerTitle: true,
       ),
       body: Center(
@@ -36,7 +36,7 @@ class _StartScreenState extends State<StartScreen> {
             const SizedBox(height: 20),
             const Text(
               'Calculadora de precio de impresiones 3D',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),

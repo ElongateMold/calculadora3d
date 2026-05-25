@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import '../repositories/history_repository.dart';
 
-class HistoryScreen extends StatelessWidget {
-  final HistoryRepository historyRepository = FirebaseHistory(); 
+class HistoryScreen extends StatefulWidget {
 
-  HistoryScreen({super.key});
+  const HistoryScreen({super.key});
+
+  @override
+  State<HistoryScreen> createState() => _HistoryScreenState();
+}
+
+class _HistoryScreenState extends State<HistoryScreen> {
+  final HistoryRepository historyRepository = FirebaseHistory(); 
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +36,25 @@ class HistoryScreen extends StatelessWidget {
             itemCount: history.length,
             itemBuilder: (context, index) {
               final item = history[index];
-              return ListTile(
-                leading: const Icon(Icons.check_circle, color: Colors.green),
-                title: Text(item['name'], style: const TextStyle(fontWeight: FontWeight.bold)),
-                subtitle: Text("Gramos: ${item['grams']}g | Horas: ${item['hours']}h\nFecha: ${item['date']}"),
-                trailing: Text(
-                  "\$${item['price'].toStringAsFixed(0)}", 
-                  style: const TextStyle(fontSize: 16, color: Colors.blue, fontWeight: FontWeight.bold),
-                ),
+              return Dismissible (
+                key: Key (item['id']),
+                onDismissed: (DismissDirection direction) async {
+                  setState((){
+                    history.removeAt(index);
+                  });
+                  await historyRepository.deletePrint(item['id']);
+                },
+                
+                child: 
+                  ListTile(
+                    leading: const Icon(Icons.check_circle, color: Colors.green),
+                    title: Text(item['name'], style: const TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Text("Gramos: ${item['grams']}g | Horas: ${item['hours']}h\nFecha: ${item['date']}"),
+                    trailing: Text(
+                      "\$${item['price'].toStringAsFixed(0)}", 
+                      style: const TextStyle(fontSize: 16, color: Colors.blue, fontWeight: FontWeight.bold),
+                    ),
+                  ),
               );
             },
           );
