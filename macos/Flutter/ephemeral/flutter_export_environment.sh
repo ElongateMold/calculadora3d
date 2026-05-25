@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=C:\Users\alumno06.lab48\AndroidStudioProjects\flutter\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\alumno06.lab48\AndroidStudioProjects\calculartor3d"
+export "FLUTTER_ROOT=C:\Users\Stefan\flutter\flutter"
+export "FLUTTER_APPLICATION_PATH=C:\Users\Stefan\Documents\flutter-proyects\calculadora3d"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=0.1.0"
