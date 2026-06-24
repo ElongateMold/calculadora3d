@@ -20,4 +20,21 @@ class FilamentRepository {
       throw Exception('Error de conexión a la API');
     }
   }
+
+  Future<Map<String, dynamic>> fetchSpecificFilament(String relativePath) async {
+    // Combinamos la ruta base, la marca y la ruta específica (ej: "materials/PETG/index.json")
+    final url = Uri.parse('$baseUrl/brands/esun_3d/$relativePath');
+    
+    try {
+      final response = await http.get(url);
+      
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        throw Exception('Error al cargar detalle: Código ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error de conexión al cargar detalle');
+    }
+  }
 }

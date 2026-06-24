@@ -1,9 +1,9 @@
 import 'package:calculartor3d/repositories/auth_repository.dart';
+import 'package:calculartor3d/screens/filaments_screen.dart';
 import 'package:flutter/material.dart';
 import 'parameters_screen.dart';
 import 'calculate_screen.dart';
 import 'history_screen.dart';
-import 'auth_screen.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -60,7 +60,7 @@ class _StartScreenState extends State<StartScreen> {
                       MaterialPageRoute(builder: (context) => const ConfigScreen()),
                     );
                   },
-                  label: const Text('Ajustes'),
+                  label: const Text('Parámetros'),
                 ),
               ],
             ),
@@ -72,7 +72,17 @@ class _StartScreenState extends State<StartScreen> {
                   MaterialPageRoute(builder: (context) => HistoryScreen()),
                 );
               },
-              label: const Text('Ver Historial'),
+              label: const Text('Historial'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FilamentsScreen()),
+                );
+              },
+              label: const Text('Filamentos'),
             ),
           ],
         ),

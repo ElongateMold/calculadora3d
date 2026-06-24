@@ -17,10 +17,36 @@ class FilamentProvider extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
   String? get error => _error;
-  List<FilamentMaterial> get materials => _materials; // ¡Ojo! Cambié dynamic por tu modelo
+  List<FilamentMaterial> get materials => _materials;
   FilamentDetail? get selectedDetail => _selectedDetail;
 
-  // --- PASO 1: CARGAR LA LISTA DE MATERIALES ---
+  // --- NUEVAS VARIABLES PARA LA PANTALLA INTERMEDIA ---
+  List<SpecificFilament> _specificFilaments = [];
+  List<SpecificFilament> get specificFilaments => _specificFilaments;
+
+  // --- NUEVO MÉTODO PARA CARGAR LA LISTA INTERMEDIA (Ej: Todas las variantes de PLA) ---
+  Future<void> loadSpecificFilamentsList(String materialPath) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+
+    try {
+      // Usamos tu misma función del repositorio, porque el path que viene en el JSON ya está listo
+      // Ej: materialPath = "materials/PLA/index.json"
+      final data = await _repository.fetchSpecificFilament(materialPath);
+      
+      if (data['filaments'] != null) {
+        final List<dynamic> filamentsList = data['filaments'];
+        _specificFilaments = filamentsList.map((json) => SpecificFilament.fromJson(json)).toList();
+      }
+    } catch (e) {
+      _error = 'Error al cargar variantes: $e';
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
   Future<void> loadBrandMaterials() async {
     _isLoading = true;
     _error = null;
@@ -45,10 +71,23 @@ class FilamentProvider extends ChangeNotifier {
     }
   }
 
-  // --- PASO 2: CARGAR LOS DETALLES DE UN MATERIAL ESPECÍFICO ---
   Future<void> loadSpecificFilament(String materialPath) async {
-     // Aquí irá la lógica cuando el usuario toque una tarjeta.
-     // Harás un http.get(url_base + materialPath)
-     // y guardarás el resultado en _selectedDetail.
+     _isLoading = true;
+    _error = null;
+    notifyListeners(); // Avisamos a la UI que muestre el ícono de carga
+
+    try {
+      // 1. Usamos el repositorio de forma limpia
+      final data = await _repository.fetchSpecificFilament(materialPath);
+      
+      // 2. Transformamos el mapa JSON a nuestro modelo Dart
+      _selectedDetail = FilamentDetail.fromJson(data);
+      
+    } catch (e) {
+      _error = 'Error al cargar el detalle: $e';
+    } finally {
+      _isLoading = false;
+      notifyListeners(); // Avisamos a la UI que ya tenemos los datos
+    }
   }
 }

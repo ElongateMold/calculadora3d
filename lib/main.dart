@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'colors.dart';
+import 'package:provider/provider.dart';
+import 'package:calculartor3d/providers/filament_provider.dart';
 
 final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.system);
 void main() async {
@@ -11,7 +13,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const Calculator3DApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => FilamentProvider()),
+      ],
+      child: const Calculator3DApp(),
+    ),
+  );
 }
 
 class Calculator3DApp extends StatelessWidget {
