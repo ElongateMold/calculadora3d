@@ -48,7 +48,7 @@ Compila y ejecuta la aplicación:
 
     Bash
     flutter run
-    
+
 (Para compilar el APK de producción, utiliza flutter build apk --release).
 
 ## Pantallas Principales
