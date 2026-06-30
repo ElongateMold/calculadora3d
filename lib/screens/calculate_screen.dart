@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../services/calculator_service.dart';
 import '../repositories/history_repository.dart';
-import '../colors.dart';
 
 class CalculateScreen extends StatefulWidget {
   const CalculateScreen({super.key});
@@ -47,7 +46,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Calcular Precio')),
-      body: SingleChildScrollView( // Para evitar que el teclado tape el contenido
+      body: SingleChildScrollView( 
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
@@ -84,24 +83,49 @@ class _CalculateScreenState extends State<CalculateScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30), // Un poco más de espacio antes del botón
+            
+            // EL NUEVO BOTÓN PROTAGONISTA
             ElevatedButton(
               onPressed: _doCalculation,
-              child: const Text('Calcular Total'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primaryDark, // Tu esmeralda brillante
+                foregroundColor: const Color(0xFF16191A), // Texto oscuro para máximo contraste
+                minimumSize: const Size(double.infinity, 55), // Ocupa todo el ancho
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 4, // Sombra para que resalte en modo oscuro
+              ),
+              child: const Text(
+                'Calcular Total',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ),
+            
             const SizedBox(height: 30),
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColors.primaryDark),
+            
+            // EL CONTENEDOR CONDICIONAL
+            // Solo se dibujará en pantalla si _result tiene algún texto
+            if (_result.isNotEmpty)
+              Container(
+                width: double.infinity, // Para que el recuadro se vea uniforme con el botón
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: AppColors.primary, // Fondo verde oscuro
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppColors.primaryDark, width: 1.5),
+                ),
+                child: Text(
+                  _result,
+                  textAlign: TextAlign.center, // Centramos el texto del precio
+                  style: const TextStyle(
+                    fontSize: 24, 
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white, // Aseguramos que el texto sea blanco
+                  ),
+                ),
               ),
-              child: Text(
-                _result.isEmpty ? "Ingresa los datos para calcular" : _result,
-                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-            ),
           ],
         ),
       ),

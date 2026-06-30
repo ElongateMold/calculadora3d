@@ -65,8 +65,22 @@ Future<List<Map<String, dynamic>>> readPrint() async {
 
   @override
   Future<int> counter() async {
+    // 1. Obtenemos el usuario actual
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    
+    // 2. Si no hay usuario activo, devolvemos 0 por seguridad
+    if (uid == null) return 0; 
+
     final db = FirebaseFirestore.instance;
-    final snapshot = await db.collection('history').count().get();
+    
+    // 3. Apuntamos a la subcolección correcta del usuario
+    final snapshot = await db
+        .collection('users')
+        .doc(uid)
+        .collection('history')
+        .count()
+        .get();
+        
     int counter = snapshot.count ?? 0;
     return counter;
   }

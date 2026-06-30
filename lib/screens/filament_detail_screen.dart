@@ -84,7 +84,29 @@ class _FilamentDetailScreenState extends State<FilamentDetailScreen> {
                   '${detail.bedTempMin}°C - ${detail.bedTempMax}°C', 
                   Icons.grid_4x4
                 ),
-              ],
+                
+                // --- NUEVO BOTÓN PARA VOLVER AL INICIO ---
+                const Spacer(), // Empuja el botón hacia el final de la pantalla
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // Cierra todas las ventanas hasta llegar a la StartScreen
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                  },
+                  icon: const Icon(Icons.home),
+                  label: const Text(
+                    'Volver al Inicio',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF58BC7A), // Tu color esmeralda
+                    foregroundColor: const Color(0xFF16191A), // Texto oscuro
+                    minimumSize: const Size(double.infinity, 50), // Ancho completo
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ], // <-- Este es el cierre de children de tu Column
             ),
           );
         },
@@ -93,16 +115,21 @@ class _FilamentDetailScreenState extends State<FilamentDetailScreen> {
   }
 
   // Un pequeño widget de ayuda para mantener el código limpio y profesional
+  // Un pequeño widget de ayuda para mantener el código limpio y profesional
   Widget _buildInfoCard(String title, String value, IconData icon) {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
         leading: Icon(icon, color: const Color(0xFF58BC7A), size: 30), // Tu esmeralda
-        title: Text(title, style: const TextStyle(color: Colors.grey)),
+        title: Text(title, style: const TextStyle(color: Colors.grey)), // El gris funciona en ambos modos
         subtitle: Text(
           value,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black87),
+          // ¡Aquí eliminamos el Colors.black87!
+          style: const TextStyle(
+            fontWeight: FontWeight.bold, 
+            fontSize: 18,
+          ), 
         ),
       ),
     );

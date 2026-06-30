@@ -1,6 +1,6 @@
 import 'package:calculartor3d/main.dart';
 import 'package:flutter/material.dart';
-import '../colors.dart'; // Tu clase de colores globales
+// Tu clase de colores globales
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

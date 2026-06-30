@@ -40,10 +40,16 @@ class _StartScreenState extends State<StartScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),
+            
+            // PRIMERA FILA DE BOTONES
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(160, 45), // Ancho y alto uniforme
+                  ),
+                  icon: const Icon(Icons.calculate), // Ícono agregado
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -54,6 +60,10 @@ class _StartScreenState extends State<StartScreen> {
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(160, 45),
+                  ),
+                  icon: const Icon(Icons.tune), // Ícono de parámetros/ajustes
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -64,25 +74,41 @@ class _StartScreenState extends State<StartScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HistoryScreen()),
-                );
-              },
-              label: const Text('Historial'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FilamentsScreen()),
-                );
-              },
-              label: const Text('Filamentos'),
+            
+            const SizedBox(height: 20), // Separación entre las filas
+            
+            // SEGUNDA FILA DE BOTONES
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(160, 45),
+                  ),
+                  icon: const Icon(Icons.history),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HistoryScreen()),
+                    );
+                  },
+                  label: const Text('Historial'),
+                ),
+                const SizedBox(width: 20),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(160, 45),
+                  ),
+                  icon: const Icon(Icons.inventory_2), // Ícono de inventario/filamentos
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const FilamentsScreen()),
+                    );
+                  },
+                  label: const Text('Filamentos'),
+                ),
+              ],
             ),
           ],
         ),
