@@ -32,17 +32,23 @@ El proyecto está construido siguiendo buenas prácticas de separación de respo
 ## Instalación y Uso
 
 Clona este repositorio:
+    
     Bash
     git clone https://github.com/tu-usuario/threed-calculator.git
+
 Instala las dependencias:
+
     Bash
     flutter pub get
+
 Configura Firebase:
 - Asegúrate de tener tu archivo google-services.json (Android) configurado en android/app/.
 - Verifica que las reglas de Firestore estén configuradas para permitir lectura/escritura solo a usuarios autenticados con su respectivo UID.
 Compila y ejecuta la aplicación:
+
     Bash
     flutter run
+    
 (Para compilar el APK de producción, utiliza flutter build apk --release).
 
 ## Pantallas Principales
