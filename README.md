@@ -46,8 +46,8 @@ Configura Firebase:
 - Verifica que las reglas de Firestore estén configuradas para permitir lectura/escritura solo a usuarios autenticados con su respectivo UID.
 Compila y ejecuta la aplicación:
 
-    Bash
-    flutter run
+      Bash
+      flutter run
 
 (Para compilar el APK de producción, utiliza flutter build apk --release).
 
